@@ -4,14 +4,15 @@ namespace cashier_csharp
 {
 	class MainClass
 	{
-		public static void Main (string[] args)
+		public static Main (string[] args)
 		{
-			due = AmtDueInput ();
-			tendered = AmtTenderedInput ();
-			Calculate (due, tendered);
+			due = AmtDueInput();
+			tendered = AmtTenderedInput();
+			totalDiff = Calculate(due, tendered);
+			Console.Write (System.Environment.NewLine + "Your change is: {0}", totalDiff);
 		}
 
-		public static void AmtDueInput()
+		public static string AmtDueInput()
 		{
 			string amtDue;
 			Console.Write (System.Environment.NewLine + "What is the amount due? ");
@@ -24,7 +25,7 @@ namespace cashier_csharp
 
 		}
 
-		public static void AmtCheck(string amt)
+		public static string AmtCheck(string amt)
 		{
 			string pattern = "[A-Za-z]";
 
@@ -37,7 +38,7 @@ namespace cashier_csharp
 		
 		}
 
-		public static void AmtTenderedInput ()
+		public static string AmtTenderedInput ()
 		{
 			string amtTendered;
 			Console.Write (System.Environment.NewLine + "What is the amount tendered?");
@@ -50,9 +51,10 @@ namespace cashier_csharp
 		}
 
 
-		public static void Calculate()
+		public static double Calculate(string due, string tendered)
 		{
-
+			float diff = (Convert.ToDouble (due)) - (Convert.ToDouble (tendered));
+			return diff;
 		}
 	}
 }
