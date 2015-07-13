@@ -2,58 +2,60 @@ using System;
 
 namespace cashier_csharp
 {
-	class MainClass
+	class Program
 	{
-		public static Main (string[] args)
+		public static void Main(string[] args)
 		{
-			due = AmtDueInput();
-			tendered = AmtTenderedInput();
-			totalDiff = Calculate(due, tendered);
-			Console.Write (System.Environment.NewLine + "Your change is: {0}", totalDiff);
+			string due = AmtDueInput();
+			string tendered = AmtTenderedInput();
+			decimal totalDiff = Calculate(due, tendered);
+			
+			Console.WriteLine("Your change is " + totalDiff);
+			Console.ReadLine();
 		}
-
+		
 		public static string AmtDueInput()
 		{
 			string amtDue;
-			Console.Write (System.Environment.NewLine + "What is the amount due? ");
-			Console.Write ("The amount due is: {0}", amtDue = Console.ReadLine());
+			Console.WriteLine(System.Environment.NewLine + "What is the amount due? ");
+			Console.WriteLine("The amount due is: {0}", amtDue = Console.ReadLine());
 			if (AmtCheck (amtDue) == false) {
-				AmtDueInput ();
+				return AmtDueInput ();
 			} else {
 				return amtDue;
 			}
-
+			
 		}
-
-		public static string AmtCheck(string amt)
+		
+		public static bool AmtCheck(string amt)
 		{
 			string pattern = "[A-Za-z]";
-
+			
 			if (System.Text.RegularExpressions.Regex.IsMatch (amt, pattern)) {
-				Console.Write (System.Environment.NewLine + "Wrong input type");
+				Console.WriteLine(System.Environment.NewLine + "Wrong input type");
 				return false;
 			} else {
 				return true;
 			}
-		
+			
 		}
-
-		public static string AmtTenderedInput ()
+		
+		public static string AmtTenderedInput()
 		{
 			string amtTendered;
-			Console.Write (System.Environment.NewLine + "What is the amount tendered?");
-			Console.Write ("The amount tendered is: {0}", amtTendered = Console.ReadLine ());
+			Console.WriteLine(System.Environment.NewLine + "What is the amount tendered?");
+			Console.WriteLine("The amount tendered is: {0}", amtTendered = Console.ReadLine());
 			if (AmtCheck (amtTendered) == false) {
-				AmtTenderedInput ();
+				return AmtTenderedInput();
 			} else {
 				return amtTendered;
 			}
 		}
-
-
-		public static double Calculate(string due, string tendered)
+		
+		
+		public static decimal Calculate(string due, string tendered)
 		{
-			float diff = (Convert.ToDouble (due)) - (Convert.ToDouble (tendered));
+			decimal diff = Convert.ToDecimal(due) - Convert.ToDecimal(tendered);
 			return diff;
 		}
 	}
